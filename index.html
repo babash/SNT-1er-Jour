@@ -52,7 +52,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Prénom & Nom *</label>
-            <input type="text" id="studentName" required placeholder="Ex: Ada Lovelace" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
+            <input type="text" id="studentName" required maxlength="80" placeholder="Ex: Ada Lovelace" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
           </div>
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Classe *</label>
@@ -74,7 +74,7 @@
           Le Nuage de Mots
         </h2>
         <p class="text-xs text-slate-500 mb-3">Donne 3 mots qui te caractérisent ou qui t'évoquent le numérique (séparés par des virgules).</p>
-        <input type="text" id="keywords" required placeholder="Ex: Gaming, Musique, Python, Curieux..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
+        <input type="text" id="keywords" required maxlength="200" placeholder="Ex: Gaming, Musique, Python, Curieux..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
       </section>
 
       <!-- ÉTAPE 3 : GOÛTS CULTURELS (MUSIQUE, LIVRE, FILM) -->
@@ -86,16 +86,16 @@
         <div class="space-y-4">
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Musique préférée (Lien YouTube) *</label>
-            <input type="url" id="favMusic" required placeholder="Ex: https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
+            <input type="url" id="favMusic" required maxlength="300" placeholder="Ex: https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Livre ou Manga préféré *</label>
-              <input type="text" id="favBook" required placeholder="Ex: One Piece, 1984..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
+              <input type="text" id="favBook" required maxlength="100" placeholder="Ex: One Piece, 1984..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
             </div>
             <div>
               <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Série ou Film préféré *</label>
-              <input type="text" id="favMovie" required placeholder="Ex: Interstellar, Arcane..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
+              <input type="text" id="favMovie" required maxlength="100" placeholder="Ex: Interstellar, Arcane..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900">
             </div>
           </div>
         </div>
@@ -136,7 +136,7 @@
           Ta question au prof *
         </h2>
         <p class="text-xs text-slate-500 mb-3">Une question sur la SNT, le numérique ou autre (réponse au prochain cours).</p>
-        <textarea id="teacherQuestion" required rows="2" placeholder="Écris ta question ici..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900"></textarea>
+        <textarea id="teacherQuestion" required maxlength="500" rows="2" placeholder="Écris ta question ici..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-slate-900"></textarea>
       </section>
 
       <!-- BOUTON DE VALIDATION -->
@@ -195,7 +195,13 @@
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1a2FocHlxa2xqaWRkbWltcHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NDQ0MDYsImV4cCI6MjEwODUyMDQwNn0.fYITbTbfeC4UmpPjmsDIdKAmH6d2Hpfkdhio2WILgNw";
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    let allSubmissions = [];
+    // Le nuage : des lignes { classe, mot, nombre }, renvoyées par la fonction snt_nuage()
+    // de la base. La page ne lit jamais les réponses elles-mêmes (voir supabase/LISEZMOI.md).
+    let nuage = [];
+
+    // Les mêmes limites que la base (supabase/1-nuage.sql).
+    const MOTS_MAX = 10;
+    const LONGUEUR_MOT_MAX = 40;
 
     async function handleSubmit(event) {
       event.preventDefault();
@@ -209,6 +215,14 @@
       const selectedQuote = document.querySelector('input[name="favoriteQuote"]:checked').value;
       const teacherQuestion = document.getElementById('teacherQuestion').value.trim();
       const statusMsg = document.getElementById('statusMsg');
+
+      if (keywords.length > MOTS_MAX || keywords.some(k => k.length > LONGUEUR_MOT_MAX)) {
+        statusMsg.textContent = "Étape 2 : " + MOTS_MAX + " mots au plus, de " + LONGUEUR_MOT_MAX + " caractères au plus chacun, séparés par des virgules.";
+        statusMsg.className = "mt-3 text-sm font-semibold text-rose-600";
+        statusMsg.classList.remove('hidden');
+        document.getElementById('keywords').focus();
+        return;
+      }
 
       statusMsg.textContent = "Envoi en cours...";
       statusMsg.className = "mt-3 text-sm font-semibold text-indigo-600";
@@ -249,9 +263,9 @@
 
     async function fetchDataAndRenderCloud() {
       try {
-        const { data, error } = await db.from('snt_responses').select('*');
+        const { data, error } = await db.rpc('snt_nuage');
         if (error) throw error;
-        allSubmissions = data || [];
+        nuage = data || [];
         renderWordCloud();
       } catch (err) {
         console.error("Erreur de lecture :", err);
@@ -260,23 +274,20 @@
 
     function renderWordCloud() {
       const filter = document.getElementById('filterClass').value;
-      const filteredData = filter === 'all' 
-        ? allSubmissions 
-        : allSubmissions.filter(item => item.student_class === filter);
 
-      const freqMap = {};
-      filteredData.forEach(entry => {
-        if (Array.isArray(entry.keywords)) {
-          entry.keywords.forEach(word => {
-            const cleanWord = word.toLowerCase().trim();
-            if (cleanWord) {
-              freqMap[cleanWord] = (freqMap[cleanWord] || 0) + 1;
-            }
-          });
+      // La base a déjà nettoyé les mots (minuscules, sans blancs autour, sans mots vides)
+      // et les a comptés par classe : il reste à additionner les classes affichées.
+      const freqMap = new Map();
+      nuage.forEach(ligne => {
+        if (filter === 'all' || ligne.classe === filter) {
+          freqMap.set(ligne.mot, (freqMap.get(ligne.mot) || 0) + Number(ligne.nombre));
         }
       });
 
-      const list = Object.keys(freqMap).map(key => [key, freqMap[key] * 12 + 10]);
+      // Les mots les plus fréquents d'abord : WordCloud les place en premier, au centre.
+      const list = [...freqMap.entries()]
+        .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))
+        .map(([mot, nombre]) => [mot, nombre * 12 + 10]);
 
       const canvas = document.getElementById('wordCloudCanvas');
       canvas.width = canvas.parentElement.offsetWidth;
