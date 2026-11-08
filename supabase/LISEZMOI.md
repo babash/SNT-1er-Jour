@@ -12,7 +12,7 @@ Les deux fichiers ne touchent qu'à la table `snt_responses` (le projet est part
 ## L'ordre d'application
 
 1. **`1-nuage.sql`** : la fonction du nuage et la taille des champs. La page actuelle continue de marcher.
-2. **La nouvelle `index.html` en ligne** : vérifie que le nuage s'affiche.
+2. **La nouvelle `index.html` en ligne** : vérifie que le nuage s'affiche, puis attends 10 minutes, le temps que les navigateurs oublient l'ancienne page (GitHub Pages la garde 10 minutes en cache).
 3. **`2-fermer-lecture.sql`** : plus de lecture publique.
 4. **Vérifie** :
    - la page dessine toujours le nuage, et une réponse d'essai s'envoie (efface-la ensuite) ;
