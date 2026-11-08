@@ -7,7 +7,7 @@ Après ces deux fichiers :
 - les élèves peuvent seulement **ajouter** une réponse ;
 - toi seul·e lis les réponses complètes, dans le tableau de bord de Supabase.
 
-Les deux fichiers ne touchent qu'à la table `snt_responses` (le projet est partagé avec Alien Python et Gombessa). Chacun se colle d'un bloc dans **SQL Editor**, puis **Run**. Chacun peut être relancé sans dommage.
+Les deux fichiers ne touchent qu'à la table `snt_responses` (le projet est partagé avec Alien Python et Gombessa). Chacun se colle d'un bloc dans **SQL Editor**, puis **Run**. Chacun peut être relancé sans dommage. Le troisième, `0-table.sql`, ne sert qu'à une copie (voir la fin).
 
 ## L'ordre d'application
 
@@ -90,3 +90,8 @@ Le nuage se vide avec les réponses.
 - **`snt_taille_max(text[])`** sert aux contraintes : elle donne la longueur du plus long mot-clé. Elle ne lit aucune table ; `anon` et `authenticated` doivent pouvoir l'exécuter, sinon plus personne ne peut ajouter de réponse.
 - **Les avertissements de Supabase** (Advisors, Security) peuvent signaler que `snt_nuage()` est « security definer » et exécutable par `anon`, ou que la règle d'ajout accepte tout (`with check (true)`). C'est voulu : la fonction ne renvoie que les mots comptés, et chaque élève doit pouvoir répondre sans compte.
 - **La limite de l'API** (1 000 lignes par réponse, réglage par défaut) vaut aussi pour le nuage : au-delà de 1 000 couples classe et mot, les mots les plus rares ne s'affichent plus.
+
+## Pour une copie de la page
+
+1. Dans un projet Supabase neuf, dans **SQL Editor** : `0-table.sql`, `1-nuage.sql`, puis `2-fermer-lecture.sql`, à la suite (aucune page ne lit encore la table).
+2. Dans `index.html` : l'adresse de ton projet (`SUPABASE_URL`) et sa clé publique (`SUPABASE_ANON_KEY` : la clé « anon » ou « publishable », jamais la clé « service_role » ou « secret ») ; puis tes classes, dans les deux listes : le formulaire (`studentClass`) et le filtre du nuage (`filterClass`).
