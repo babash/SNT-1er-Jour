@@ -6,7 +6,7 @@
 
 ## 👉 [Essayer maintenant : babash.github.io/SNT-1er-Jour](https://babash.github.io/SNT-1er-Jour/)
 
-**Gratuit · sans compte · rien à installer · aussi sur téléphone · prénom et nom, enregistrés en ligne**
+**Gratuit · sans compte · rien à installer · aussi sur téléphone · prénom et nom, enregistrés en ligne ; seul le nuage des mots-clés est visible**
 
 SNT 1er jour fait partie des [Ressources NSI et SNT](https://babash.github.io/Babash-NSI-SNT/), rubrique [SNT](https://babash.github.io/Babash-NSI-SNT/snt/).
 
@@ -51,7 +51,7 @@ En bas de la page, le **nuage de mots** de la classe : chaque mot en minuscules,
 
 ## Données des élèves
 
-- **Enregistré en ligne** (Supabase) : le prénom et le nom, la classe, les mots-clés, la citation choisie (son numéro), la question au prof, les goûts (un lien YouTube, un livre ou manga, une série ou un film) et la date d'envoi. Pas d'adresse électronique. Le nom de famille est demandé : c'est une exception décidée pour cette ressource.
+- **Enregistré en ligne** (Supabase) : le prénom et le nom, la classe, les mots-clés, la citation choisie (son numéro), la question posée à l'étape **Ta question au prof**, les goûts (un lien YouTube, un livre ou manga, une série ou un film) et la date d'envoi. Pas d'adresse électronique. Le nom de famille est demandé : c'est une exception décidée pour cette ressource.
 - **Visible par les autres** : seulement le nuage des mots-clés, par classe, pour toute personne qui ouvre la page. La page ne reçoit que les mots et leur nombre, jamais les noms, les questions ni les goûts ; les élèves ne peuvent ni relire ni modifier les réponses, même la leur.
 - **Sur l'appareil** : rien, ni cookie ni stockage du navigateur.
 - **Pour effacer** : l'enseignant·e qui gère la base, dans le tableau de bord de Supabase (**Table Editor** ou **SQL Editor**), après usage.
