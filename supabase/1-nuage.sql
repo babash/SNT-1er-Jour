@@ -12,7 +12,7 @@ begin;
 -- 1. Le nuage de mots, et rien d'autre.
 -- Pour chaque classe, chaque mot-clé et le nombre de fois où il a été donné.
 -- Le nettoyage est celui que faisait la page (word.toLowerCase().trim(),
--- puis les mots vides ignorés) :
+-- puis les chaînes vides ignorées) :
 --   - lower() suit la casse Unicode, comme toLowerCase() (base en ICU, en-US) ;
 --   - btrim() retire les mêmes blancs que trim() en JavaScript, donnés ici par
 --     leur code Unicode : tabulation (9), saut de ligne (10), tabulation verticale (11),
