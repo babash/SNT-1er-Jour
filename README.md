@@ -1,4 +1,4 @@
-# 👋 SNT 1er jour : brise-glace et découverte
+# 🚀 SNT 1er jour : brise-glace et découverte
 
 **Un formulaire pour faire connaissance à la première séance de SNT, et le nuage de mots de la classe qui se construit avec les réponses.** Pour la seconde, en SNT.
 
