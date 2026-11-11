@@ -206,7 +206,7 @@
     // de la base. La page ne lit jamais les réponses elles-mêmes (voir supabase/LISEZMOI.md).
     let nuage = [];
 
-    // Les mêmes limites que la base (supabase/1-nuage.sql).
+    // Les mêmes limites que la base (supabase/3-fonction-ajout.sql).
     const MOTS_MAX = 10;
     const LONGUEUR_MOT_MAX = 40;
 
@@ -236,20 +236,28 @@
       statusMsg.classList.remove('hidden');
 
       try {
-        const { error } = await db.from('snt_responses').insert([
-          {
-            student_name: name,
-            student_class: studentClass,
-            keywords: keywords,
-            fav_music: favMusic,
-            fav_book: favBook,
-            fav_movie: favMovie,
-            favorite_quotes: [parseInt(selectedQuote)],
-            question: teacherQuestion
-          }
-        ]);
+        // L'envoi passe par la fonction snt_repondre() de la base (supabase/3-fonction-ajout.sql) :
+        // la page n'écrit jamais elle-même dans la table. La fonction renvoie { ok: true },
+        // ou { ok: false, champ, message } si la réponse est refusée (rien n'est alors enregistré).
+        const { data, error } = await db.rpc('snt_repondre', {
+          p_prenom_nom: name,
+          p_classe: studentClass,
+          p_mots_cles: keywords,
+          p_citations: [parseInt(selectedQuote)],
+          p_question: teacherQuestion,
+          p_musique: favMusic,
+          p_livre: favBook,
+          p_film: favMovie
+        });
 
         if (error) throw error;
+
+        if (!data || !data.ok) {
+          // Le message de la base, en rose, à la place de « Erreur d'envoi ».
+          statusMsg.textContent = "❌ " + ((data && data.message) || "Erreur d'envoi. Préviens le professeur.");
+          statusMsg.className = "mt-3 text-sm font-semibold text-rose-400";
+          return;
+        }
 
         statusMsg.textContent = "✅ Validé avec succès !";
         statusMsg.className = "mt-3 text-sm font-semibold text-emerald-400";
