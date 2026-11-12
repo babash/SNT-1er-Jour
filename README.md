@@ -65,7 +65,7 @@ Le détail : [supabase/LISEZMOI.md](supabase/LISEZMOI.md).
 Telle quelle, la page envoie les réponses dans la base de Babash - NSI Tani Malandi et ne propose que ses classes. Pour tes classes :
 
 1. Copie le dépôt (**Fork**) et publie-le avec GitHub Pages.
-2. Crée un projet [Supabase](https://supabase.com) ; dans **SQL Editor**, lance `supabase/0-table.sql`, `supabase/1-nuage.sql`, puis `supabase/2-fermer-lecture.sql`.
+2. Crée un projet [Supabase](https://supabase.com) ; dans **SQL Editor**, lance d'abord le socle commun du site (`supabase/schema.sql` du dépôt [Babash-NSI-SNT](https://github.com/babash/Babash-NSI-SNT)), puis `supabase/schema.sql` de ce dépôt.
 3. Dans `index.html`, mets l'adresse et la clé publique de ton projet (la clé « anon » ou « publishable », jamais la clé « service_role » ou « secret »), puis tes classes, dans la liste du formulaire et dans le filtre du nuage.
 
 Lire et effacer les réponses, revenir en arrière : [supabase/LISEZMOI.md](supabase/LISEZMOI.md).
