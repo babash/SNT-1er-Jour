@@ -8,7 +8,7 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Supabase JS Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0"></script>
   <!-- WordCloud2.js -->
   <script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.min.js"></script>
   <!-- FontAwesome -->
@@ -199,7 +199,7 @@
   <script>
     // CONFIGURATION SUPABASE (À conserver avec vos clés)
     const SUPABASE_URL = "https://cukahpyqkljiddmimpyi.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1a2FocHlxa2xqaWRkbWltcHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NDQ0MDYsImV4cCI6MjEwODUyMDQwNn0.fYITbTbfeC4UmpPjmsDIdKAmH6d2Hpfkdhio2WILgNw";
+    const SUPABASE_ANON_KEY = "sb_publishable_dYwCrwaqiDOm8knczJu3Kw_5InHwyPB";
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Le nuage : des lignes { classe, mot, nombre }, renvoyées par la fonction snt_nuage()
