@@ -38,7 +38,7 @@ En bas de la page, le **nuage de mots** de la classe : chaque mot en minuscules,
 
 | Usage | Comment |
 |---|---|
-| **Une séance en classe** (la première de l'année) | Le formulaire, puis le nuage projeté pour se présenter et lancer l'année ; Z-Type pour qui finit en avance. |
+| **Une séance en classe** (la première de l'année ; sa durée sera précisée après un essai en classe) | Le formulaire, puis le nuage projeté pour se présenter et lancer l'année ; Z-Type pour qui finit en avance. |
 | **Sur téléphone** | La page passe sur une colonne, et le nuage s'adapte à la largeur de l'écran. |
 | **Avec des collègues** | Chaque collègue fait sa copie, avec sa propre base et ses classes (voir « Pour aller plus loin »). |
 
@@ -72,7 +72,7 @@ Lire et effacer les réponses, revenir en arrière : [supabase/LISEZMOI.md](supa
 
 ## Contact
 
-Conçu par Babash - NSI Tani Malandi pour les classes de SNT de l'académie de Mayotte. Ce README et la protection des réponses (dans la page et dans le dossier `supabase/`) sont faits avec l'aide de l'IA ([Claude Code](https://claude.com/claude-code)).
+Conçu par Babash - NSI Tani Malandi pour les classes de SNT de l'académie de Mayotte, avec l'aide de l'IA (au moins pour une part). Ce README et la protection des réponses (dans la page et dans le dossier `supabase/`) sont faits avec [Claude Code](https://claude.com/claude-code).
 Une question, une idée, un bug ? Les [issues GitHub](https://github.com/babash/SNT-1er-Jour/issues) du dépôt. Toutes les ressources sont sur le site [Ressources NSI et SNT](https://babash.github.io/Babash-NSI-SNT/).
 
 ## Licence
